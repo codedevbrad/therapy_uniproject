@@ -8,10 +8,7 @@
     "main": "src/server.js",
     "scripts": {
         "server:dry": "node src/server.js",
-        "server:watch": "nodemon bin/dev",
-        "native-install": "npm install --prefix client",
-        "native-run": "npm run start --prefix client",
-        "app-run-all": "concurrently \"npm run server-watch\" \"npm run client-run\""
+        "server:watch": "nodemon bin/dev"
     },
     "dependencies": {
         "@codedevbrad/serverutils": "^1.0.2",

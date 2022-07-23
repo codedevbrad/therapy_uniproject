@@ -4,3 +4,5 @@ what's in here?
  * notification system to ping all / single - done by establishing websocket / creating a /all room or channel and pushing to specific room.
  * get patient activity records for the day.
  * pre-made goals / activities / flashcards. 
+
+ * routes for cloudinary.

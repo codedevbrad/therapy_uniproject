@@ -7,7 +7,7 @@ module.exports.errors = function( app ) {
 
   // error 500
   app.use( ( err , req , res , next ) => {
-     console.log( err );
+     console.log( 'error with api' , err );
      res.status( err.status || 500 );
      res.send( {
           msg : err.message || err ,

@@ -18,5 +18,7 @@ api.get('/getuser' , asyncSupport( async ( req , res , next ) => {
         res.status( 200 ).send( user );
 }));
 
+// update last logged.
+
 
 module.exports = api;

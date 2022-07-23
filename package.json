@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api-run":     "npm run server:watch --prefix api",
+    "native-run":  "npm run start --prefix client",
+    "app-run-all": "concurrently \"npm run api-run\" \"npm run native-run\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedevbrad/therapy_uniproject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codedevbrad/therapy_uniproject/issues"
+  },
+  "homepage": "https://github.com/codedevbrad/therapy_uniproject#readme",
+  "dependencies": {
+    "concurrently": "^7.3.0"
+  }
+}

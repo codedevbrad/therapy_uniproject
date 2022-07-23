@@ -13,6 +13,13 @@ config.middleware(  app , __dirname );
 
 services.database();
 
+app.get('/' , ( req , res ) => {
+    res.status(200).send('server')
+});
+
+
+// @SERVICE__USER
+
 // serviceUSER : NO AUTH
 app.use('/api/serviceuser/0' , require('./services/service__user/api.noAuth') );
 // serviceUSER : AUTH protected
@@ -20,7 +27,14 @@ app.use('/api/serviceuser/1' , require('./services/service__user/api.authed' ) )
 // serviceUSER : tests.
 app.use('/api/test/serviceuser' , require( './services/service__user/api.test') );
 
+// @SERVICE__APP
+
+// @SERVICE__PATIENTWORK
+
+// END
+
 app.get('/api/end' , ( req , res ) => {
+    console.log('hit route')
     res.status(200).send('can pass without auth')
 });
 
