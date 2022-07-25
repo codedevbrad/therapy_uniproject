@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
+// contexts
+import UserContextWrapper from './src/contexts/context.user';
+
 // noAuth..
-import LoginWelcome from './src/content/noAuthed/screens/Login/index';
+import LoginUsername from './src/content/noAuthed/screens/Login/login.username';
+import LoginPassword from './src/content/noAuthed/screens/Login/login.password';
 
 // authed..
 import Dashboard from './src/content/authed/screens/Dashboard/index';
@@ -17,11 +17,14 @@ import Dashboard from './src/content/authed/screens/Dashboard/index';
 export default function App ( ) {
 
   return (
-    <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen name="login" component={ LoginWelcome } />
-            <Stack.Screen name="dashboard" component={ Dashboard } options={{ headerShown: false }} />
-        </Stack.Navigator>
-    </NavigationContainer>
+    <UserContextWrapper>
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="login-1"   component={ LoginUsername }  options={{ headerShown: false }} />
+                <Stack.Screen name="login-2"   component={ LoginPassword }  options={{ headerShown: false }} />
+                <Stack.Screen name="dashboard" component={ Dashboard }      options={{ headerShown: false }} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    </UserContextWrapper> 
   );
 };

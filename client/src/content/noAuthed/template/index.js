@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Button } from 'react-native';
 
-const AppNoAuthedTemplate = ({ children }) => {
+const AppNoAuthedTemplate = ({ children , screenColor }) => {
     return (
-     <View style={styles.container}>
-        <View>
+     <View style={[ styles.container , { backgroundColor: screenColor } ]}>
             { children } 
-        </View>
         <StatusBar style="auto" />
     </View>
     )
@@ -14,10 +12,8 @@ const AppNoAuthedTemplate = ({ children }) => {
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+      flex: 1 , 
+      paddingTop: 33
     },
 });
   
