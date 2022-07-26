@@ -6,7 +6,7 @@ module.exports.errors = function( app ) {
 
     // errors.
     app.use( ( err , req , res , next ) => {
-          console.log( 'error with api' , err.status , err.message );
+          console.log( 'error with api' , err.status , err );
 
           if ( err.status == 500 ) {
               console.log('you would submit error in database if env is production');

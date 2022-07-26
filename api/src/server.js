@@ -29,11 +29,11 @@ app.use('/api/test/serviceuser' , require( './services/service__user/service.rou
 // @SERVICE__APP
 
 // activityTemplate : api
-app.use('/api/app/activitytemplate'           , require('./services/service__app/app__features/feature__activitiyTemplates/feature.routes/feature.api') );
+app.use('/api/app/activitytemplate'           , require('./services/service__app/feature__activitiyTemplates/feature.routes/feature.api') );
 // activityTemplate : tests
-app.use('/api/test/app/activitytemplate'      , require('./services/service__app/app__features/feature__activitiyTemplates/feature.routes/feature.api.test') );
+app.use('/api/test/app/activitytemplate'      , require('./services/service__app/feature__activitiyTemplates/feature.routes/feature.api.test') );
 // activityTemplate : developer 
-app.use('/api/developer/app/activitytemplate' , require('./services/service__app/app__features/feature__activitiyTemplates/feature.routes/feature.api.developer') );
+app.use('/api/developer/app/activitytemplate' , require('./services/service__app/feature__activitiyTemplates/feature.developer/developer.api') );
 
 
 

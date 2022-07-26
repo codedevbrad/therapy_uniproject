@@ -21,6 +21,10 @@ async function addActivityTemplates ( data ) {
 }
 
 
+async function removeAllActivities ( ) {
+    return ActivityTemplates.deleteMany({});
+}
+
 // EXPORTS
 
 module.exports.finderQueries = {
@@ -28,5 +32,5 @@ module.exports.finderQueries = {
 }
 
 module.exports.mutableQueries = {
-    addActivityTemplates
+    addActivityTemplates , removeAllActivities
 }

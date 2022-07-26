@@ -4,6 +4,10 @@ const feature_api__test = require('express').Router();
 
 feature_api__test.get('/' , ( req , res ) => res.status(200).send('/api/test/app/activityTemplate'));
 
+// API tests.
+
+
+// QUERIES.
 
 feature_api__test.use('/db/queries' , require('../feature.database/tests/test.db.queries') );
 
