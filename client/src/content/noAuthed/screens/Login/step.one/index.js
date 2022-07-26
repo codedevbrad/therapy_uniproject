@@ -1,12 +1,14 @@
 import { useState , useEffect , useContext } from 'react';
 import { TouchableWithoutFeedback , SafeAreaView, StyleSheet, TextInput , View , Text , Button } from 'react-native';
-import AppNoAuthedTemplate from '../../template/index';
+import AppNoAuthedTemplate from '../../../template/index';
 
-import { UserRequests } from '../../../../networkRequests';
+import { UserRequests } from '../../../../../networkRequests';
 
-import { getFromStorage , storeInStorage } from '../../../../utils/util.localstorage';
+import { getFromStorage , storeInStorage } from '../../../../../utils/util.localstorage';
 
-import { UserContext } from '../../../../contexts/context.user';
+import { UserContext } from '../../../../../contexts/context.user';
+
+import { loginScreens } from '../../../../screenNames';
 
 
 function WelcomeBack ({ pageNavigate , username } ) {
@@ -19,7 +21,7 @@ function WelcomeBack ({ pageNavigate , username } ) {
               <Text  style={ styles.whiteText }>
                   Login using this account or sign out.
               </Text>
-              <Button onPress={ ( ) => pageNavigate.navigate('login-2')} title="Login" color="white" />
+              <Button onPress={ ( ) => pageNavigate.navigate( loginScreens.step_2 )} title="Login" color="white" />
         </View>
     )
 }
@@ -37,7 +39,7 @@ function UsernameCapture ({ pageNavigate } ) {
           if ( userExists ) {
               setUsername( text );
               await storeInStorage('username' , { username: text } );
-              pageNavigate.navigate('login-2')
+              pageNavigate.navigate( loginScreens.step_2 )
           } else {
               console.log('username doesnt exist');
           }

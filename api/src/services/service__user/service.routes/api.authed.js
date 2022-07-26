@@ -1,8 +1,8 @@
 const api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
 
-const { authenticateTokenMiddleware }  = require('./authStrategy/functions/auth.token');
-const { getUserUsingTokenCredentials } = require('./authStrategy/functions/auth.authenticate');
+const { authenticateTokenMiddleware }  = require('../authStrategy/functions/auth.token');
+const { getUserUsingTokenCredentials } = require('../authStrategy/functions/auth.authenticate');
 
 // api / serviceuser / 1
 

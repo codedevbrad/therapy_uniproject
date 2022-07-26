@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 //  * pre-made goals / activities / flashcards. 
 
 // ErrorsLogged       (created)
-// ActivityTemplates  (created)
 // FlashcardTemplates (created)
 // GoalTemplates      (created)
 // ChatEvents         (created)
@@ -20,11 +19,6 @@ const ErrorLogs = new mongoose.Schema ({
                reviewed: { type: Boolean }
 });
   
-const ActivityTemplates = new mongoose.Schema ({
-                words: [ { type: String }] ,
-    therapist_attempt: { type: String } ,
-         therapy_type: [ { type: ObjectId } ]
-});
 
 const FlashcardTemplates = new mongoose.Schema ({
             flashcards: [ { type: Object } ] ,
@@ -46,6 +40,5 @@ const ChatEvents = new mongoose.Schema ({
 module.exports = mongoose.model( 'ChatEvents'         , ChatEvents );
 
 module.exports = mongoose.model( 'ErrorLogs'          , ErrorLogs );
-module.exports = mongoose.model( 'ActivityTemplates'  , ActivityTemplates );
 module.exports = mongoose.model( 'FlashcardTemplates' , FlashcardTemplates );
 module.exports = mongoose.model( 'GoalTemplates'      , Goals );

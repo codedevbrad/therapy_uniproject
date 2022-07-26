@@ -13,23 +13,33 @@ config.middleware(  app , __dirname );
 
 services.database();
 
-app.get('/' , ( req , res ) => {
-    res.status(200).send('server')
-});
+app.get('/' , ( req , res ) => res.status(200).send('server') );
 
 
 // @SERVICE__USER
 
 // serviceUSER : NO AUTH
-app.use('/api/serviceuser/0' , require('./services/service__user/api.noAuth') );
+app.use('/api/serviceuser/0'    , require('./services/service__user/service.routes/api.noAuth') );
 // serviceUSER : AUTH protected
-app.use('/api/serviceuser/1' , require('./services/service__user/api.authed' ) );
+app.use('/api/serviceuser/1'    , require('./services/service__user/service.routes/api.authed' ) );
 // serviceUSER : tests.
-app.use('/api/test/serviceuser' , require( './services/service__user/api.test') );
+app.use('/api/test/serviceuser' , require( './services/service__user/service.routes/api.test') );
+
 
 // @SERVICE__APP
 
+// activityTemplate : api
+app.use('/api/app/activitytemplate'           , require('./services/service__app/app__features/feature__activitiyTemplates/feature.routes/feature.api') );
+// activityTemplate : tests
+app.use('/api/test/app/activitytemplate'      , require('./services/service__app/app__features/feature__activitiyTemplates/feature.routes/feature.api.test') );
+// activityTemplate : developer 
+app.use('/api/developer/app/activitytemplate' , require('./services/service__app/app__features/feature__activitiyTemplates/feature.routes/feature.api.developer') );
+
+
+
 // @SERVICE__PATIENTWORK
+
+
 
 // END
 

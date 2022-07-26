@@ -1,9 +1,8 @@
-
 const api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
 
-const { login } = require('./authStrategy/functions/auth.authenticate');
-const { getUserByUsername } = require('./service.database/db.queries').finderQueries;
+const { login } = require('../authStrategy/functions/auth.authenticate');
+const { getUserByUsername } = require('../service.database/db.queries').finderQueries;
 
 // api / serviceuser / 0 / 
 

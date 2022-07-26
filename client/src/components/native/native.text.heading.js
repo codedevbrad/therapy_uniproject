@@ -4,7 +4,7 @@ import { useEffect , useState } from 'react';
 
 export default function NativeTextHeading ( { size = 'md' , color = 'white' , children , styling } ) {
 
-        const [fontsize, setsize] = useState('');
+        const [fontsize, setsize] = useState(0);
 
         function determineSize ( sizeInput ) {
             switch( sizeInput ) {
@@ -25,7 +25,7 @@ export default function NativeTextHeading ( { size = 'md' , color = 'white' , ch
         }, [] );
 
         return (
-            <Text style={ { fontSize: fontsize , color , ...styling }}>
+            <Text style={ { fontWeight: 'bold' , fontSize: fontsize , color , ...styling }}>
                     { children }
             </Text>
         )
