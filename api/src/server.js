@@ -35,10 +35,15 @@ app.use('/api/test/app/activitytemplate'      , require('./services/service__app
 // activityTemplate : developer 
 app.use('/api/developer/app/activitytemplate' , require('./services/service__app/feature__activitiyTemplates/feature.developer/developer.api') );
 
+// sessions : API.
+app.use('/api/app/sessions'           , require('./services/service__app/feature__sessions/feature.routes/feature.api') );
+// sessions : TESTS.
+app.use('/api/test/app/sessions'      , require('./services/service__app/feature__sessions/feature.routes/feature.api.test') );
+// sessions : DEVELOPER.
+app.use('/api/developer/app/sessions' , require('./services/service__app/feature__sessions/feature.developer/developer.api') );
 
 
 // @SERVICE__PATIENTWORK
-
 
 
 // END
