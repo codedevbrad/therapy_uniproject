@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
 const ActivityTemplates = new mongoose.Schema ({
-             words: { type: [ Object ] , required: true } ,
-  therapistAttempt: { type: String } , 
-              type: { type: String   , required: true } , 
-      articulation: { type: [String] } , 
+                 words: { type: [ Object ] , required: true } ,
+      therapistAttempt: { type: String } , 
+                  type: { type: String , required: true } , 
+          articulation: { type: [ String ] } , 
+        therapist_tips: { type: String }
 });
 
 module.exports = mongoose.model( "activities" , ActivityTemplates );

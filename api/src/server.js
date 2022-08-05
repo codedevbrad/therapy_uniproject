@@ -42,8 +42,14 @@ app.use('/api/test/app/sessions'      , require('./services/service__app/feature
 // sessions : DEVELOPER.
 app.use('/api/developer/app/sessions' , require('./services/service__app/feature__sessions/feature.developer/developer.api') );
 
-
 // @SERVICE__PATIENTWORK
+
+// subscriptions : API
+app.use('/api/patientwork/subscriptions'           , require('./services/service__patientwork/feature__subscriptions/feature.routes/feature.api') );
+// subscriptions : TESTS
+app.use('/api/test/patientwork/subscriptions'      , require('./services/service__patientwork/feature__subscriptions/feature.routes/feature.api.test') );
+// subscriptions : DEVELOPER
+app.use('/api/developer/patientwork/subscriptions' , require('./services/service__patientwork/feature__subscriptions/feature.developer/developer.api') );
 
 
 // END

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api-run": "npm run server:watch --prefix api",
-    "native-run": "npm run start --prefix client",
+    "api-run":     "npm run server:watch --prefix api",
+    "native-run":  "npm run start --prefix client",
     "app-run-all": "concurrently \"npm run api-run\" \"npm run native-run\""
   },
   "repository": {
