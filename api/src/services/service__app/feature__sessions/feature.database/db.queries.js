@@ -4,13 +4,14 @@ const Sessions = require('./db.model');
 // **** FINDER QUERIES **** //
 
 function getSessionsAll ( ) {
-	return Sessions.find();
+	return Sessions.find({  patient_id: patientId });
 }
 
-function getSessionsByDate( start ) {
+function getSessionsByDate( start , patientId ) {
     let end_date = new Date(new Date().getFullYear(), 11, 31);
     return Sessions.find({
-        date: { $gte: start, $lt: end_date }
+        date: { $gte: start, $lt: end_date } , 
+        patient_id: patientId
     });
 }
 

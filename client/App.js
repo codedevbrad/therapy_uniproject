@@ -13,7 +13,8 @@ import LoginUsername from './src/content/noAuthed/screens/Login/step.one/index';
 import LoginPassword from './src/content/noAuthed/screens/Login/step.two/index';
 
 // authed..
-import Dashboard from './src/content/authed/screens/Dashboard/index';
+import Dashboard      from './src/content/authed/screens/Dashboard/index';
+import CalendarScreen from './src/content/authed/screens/Calendar';
 
 
 export default function App ( ) {
@@ -23,7 +24,8 @@ export default function App ( ) {
                 <Stack.Navigator>
                     <Stack.Screen name={ loginScreens.step_1 } component={ LoginUsername }  options={{ headerShown: false }} />
                     <Stack.Screen name={ loginScreens.step_2 } component={ LoginPassword }  options={{ headerShown: false }} />
-                    <Stack.Screen name="dashboard" component={ Dashboard }      options={{ headerShown: false }} />
+                    <Stack.Screen name="dashboard" component={ Dashboard } options={{ headerShown: false }} />
+                    <Stack.Screen name="calendar"  component={ CalendarScreen } options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserContextWrapper> 

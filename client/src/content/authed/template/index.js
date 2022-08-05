@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Button , TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 
-import screenNames from '../../screenNames';
+import { authScreens } from '../../screenNames';
 
 
 const AppAuthedTemplate = ({ navigation, children }) => {
@@ -22,12 +22,12 @@ const AppAuthedTemplate = ({ navigation, children }) => {
                 </View>
             </View>
 
-            <View style={styles.screen}>
+            <View style={ styles.screenLayout }>
                 { children } 
             </View>
 
             <View style={styles.navigation}>
-                { screenNames.authScreens.map( ( item , index ) => 
+                { authScreens.map( ( item , index ) => 
                     <TouchableOpacity 
                       onPress={ ( ) => navigation.navigate( item ) } 
                           key={ index } 
@@ -68,10 +68,9 @@ const styles = StyleSheet.create ( {
         alignItems: 'flex-end',
     },
 
-    screen: {
+    screenLayout: {
         flex: 5,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: 'column',
     },
 
     navigation: {
