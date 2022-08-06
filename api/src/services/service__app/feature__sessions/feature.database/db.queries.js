@@ -3,11 +3,11 @@ const Sessions = require('./db.model');
 
 // **** FINDER QUERIES **** //
 
-function getSessionsAll ( ) {
-	return Sessions.find({  patient_id: patientId });
+function getSessionsAll ({ patientId }) {
+	return Sessions.find({ patient_id: patientId });
 }
 
-function getSessionsByDate( start , patientId ) {
+function getSessionsByDate({ start , patientId }) {
     let end_date = new Date(new Date().getFullYear(), 11, 31);
     return Sessions.find({
         date: { $gte: start, $lt: end_date } , 
@@ -30,7 +30,7 @@ async function addSession ( data ) {
 
 
 async function removeAllSessions ( ) {
-    return ActivityTemplates.deleteMany({});
+    return Sessions.deleteMany({});
 }
 
 

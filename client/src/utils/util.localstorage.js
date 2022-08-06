@@ -13,7 +13,7 @@ export const storeInStorage = async ( key , value ) => {
 export const getFromStorage = async ( key ) => {
   try {
     let data = await AsyncStorage.getItem( key );
-    return data;
+    return JSON.parse( data );
   } catch(e) {
     // error reading value
     console.log('error fetching storage' , e )

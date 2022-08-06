@@ -10,18 +10,31 @@ import { UserContext } from '../../../../../contexts/context.user';
 
 import { loginScreens } from '../../../../screenNames';
 
+import NativeTextHeading   from '../../../../../components/native/native.text.heading';
+import NativeTextParagraph from '../../../../../components/native/native.text.paragraph';
+
 
 function WelcomeBack ({ pageNavigate , username } ) {
-    
+
+    let { setUsername } = useContext( UserContext );
+
+    const resetUser = ( ) => {
+
+    }
+
+    useEffect( ( ) => {
+        setUsername( username );
+    } , [  ] );
+
     return (
         <View style={ [ { flex: 6 } , styles.container , styles.flex ]}>
-              <Text style={ styles.whiteText }> 
-                  Welcome back, { username } 
-              </Text>
-              <Text  style={ styles.whiteText }>
-                  Login using this account or sign out.
-              </Text>
-              <Button onPress={ ( ) => pageNavigate.navigate( loginScreens.step_2 )} title="Login" color="white" />
+               <NativeTextHeading size={'xl'} styling={ { paddingBottom: 20 } }>
+                    Welcome back, { username } 
+                </NativeTextHeading>
+                <NativeTextParagraph>
+                    Login using this account or sign out.
+                </NativeTextParagraph>
+                <Button onPress={ ( ) => pageNavigate.navigate( loginScreens.step_2 )} title="Login" color="white" />
         </View>
     )
 }
@@ -29,7 +42,7 @@ function WelcomeBack ({ pageNavigate , username } ) {
 
 function UsernameCapture ({ pageNavigate } ) {
 
-    const [text, onChangeText] = useState("");
+    const [ text , onChangeText ] = useState("");
 
     let { setUsername } = useContext( UserContext );
 
@@ -40,7 +53,8 @@ function UsernameCapture ({ pageNavigate } ) {
               setUsername( text );
               await storeInStorage('username' , { username: text } );
               pageNavigate.navigate( loginScreens.step_2 )
-          } else {
+          } 
+          else {
               console.log('username doesnt exist');
           }
         }
@@ -48,15 +62,21 @@ function UsernameCapture ({ pageNavigate } ) {
           console.log(err )
         }
     }
+
     return (
         <View style={[ styles.container ]}>
-            <View style={[ styles.flex , { flex: 1  } ]}>
-            
+            <View style={[ styles.flex , { flex: 3  } ]}>
+                <NativeTextHeading size={'xl'}>
+                        Login as a Patient
+                </NativeTextHeading>
+                <NativeTextParagraph>
+                        welcome to Theripal
+                </NativeTextParagraph>
             </View>
 
-            <View style={[ styles.flex , { flex: 5, flexDirection: 'column' } ]}>
+            <View style={ { flex: 3, flexDirection: 'column' , alignItems: 'center'} }>
                 <SafeAreaView style={[ { flexDirection: 'row' } ]}>
-                    <TextInput style={styles.input} onChangeText={onChangeText} value={text}  />
+                    <TextInput style={styles.input} onChangeText={onChangeText} value={text}  placeholder={'username'}/>
                 </SafeAreaView>     
                 <TouchableWithoutFeedback onPress={() => loginWithUsername()}>
                     <Text style={ { color: 'white' } }> 
@@ -71,47 +91,33 @@ function UsernameCapture ({ pageNavigate } ) {
 
 export default function LoginUsername ( { navigation } ) {
 
-    const [state, setstate] = useState('-1');
-
-    let { user } = useContext( UserContext );
-
-    async function checkIfUserLogged ( ) {
-        console.log( 'user' , user );
-    }
+    const [ state , setstate ] = useState('');
 
     async function checkIfUsernameExists ( ) {
-            let username = await getFromStorage('username');
-            console.log( username );
-            if ( username ) {
+
+            let user = await getFromStorage('username');
+
+            if ( user.username ) {
                 // go to page to see if user wants to login with saved username.
-                setstate( '0' );
-            } else {
-                // go to page to capture username.
-                setstate( '1' );
-            }
+                console.log( user.username , 'has signed in before' );
+                setstate( user.username );
+            } 
     }
   
     useEffect( ( ) => {
-        // checkIfUserLogged();
-        // checkIfUsernameExists();
-        // test pass username
-        navigation.navigate('login-2');
+        checkIfUsernameExists();
     }, [ ] );
-
 
     return (
         <AppNoAuthedTemplate>
-            <View style={[ styles.container , { backgroundColor: `navy` } ]}>
-                 { state == '-1' && 
-                    <View>
-                    </View>
-                 }
-                 { state == '0' && <WelcomeBack pageNavigate={ navigation } /> }
-                 { state == '1' && <UsernameCapture pageNavigate={ navigation } /> }
+            <View style={ styles.container  }>
+                 { state.length > 0  && <WelcomeBack pageNavigate={ navigation }  username={ state }  /> }
+                 { state.length == 0 && <UsernameCapture pageNavigate={ navigation } /> }
             </View>
         </AppNoAuthedTemplate>
     );
 }
+
 
 const styles = StyleSheet.create({
 

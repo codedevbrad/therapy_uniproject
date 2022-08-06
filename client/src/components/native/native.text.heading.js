@@ -25,7 +25,7 @@ export default function NativeTextHeading ( { size = 'md' , color = 'white' , ch
         }, [] );
 
         return (
-            <Text style={ { fontWeight: 'bold' , fontSize: fontsize , color , ...styling }}>
+            <Text style={[ { fontWeight: 'bold' , fontSize: fontsize , color } , styling ]}>
                     { children }
             </Text>
         )

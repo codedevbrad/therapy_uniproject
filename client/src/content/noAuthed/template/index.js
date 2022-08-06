@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Button } from 'react-native';
 
-const AppNoAuthedTemplate = ({ children , screenColor }) => {
+const AppNoAuthedTemplate = ({ children , screenColor = 'navy' }) => {
     return (
      <View style={[ styles.container , { backgroundColor: screenColor } ]}>
             { children } 
@@ -13,7 +13,7 @@ const AppNoAuthedTemplate = ({ children , screenColor }) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1 , 
-      paddingTop: 33
+      paddingTop: 20
     },
 });
   

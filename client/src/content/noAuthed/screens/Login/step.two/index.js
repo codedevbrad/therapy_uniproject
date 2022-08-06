@@ -82,17 +82,15 @@ export default function LoginPassword ( { navigation } ) {
           }
     }
 
-    const pinCompleted = async ( password ) => {
-        console.log('logging in' , username , password );
-        loginAttempt(  username , password );
+    const pinCompleted = async ( password ) => { 
+          console.log('logging in' , username , password );
+          loginAttempt( username , password );
     }
 
-    
     // must expect username from previous screen.
 
     useEffect( ( ) => {
         console.log('logging in');
-        loginAttempt( 'patient1' , '12345' );
     } , [ ] );
 
     return (

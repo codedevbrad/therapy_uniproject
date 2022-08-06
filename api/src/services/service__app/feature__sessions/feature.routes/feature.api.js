@@ -13,7 +13,10 @@ feature_api.get('/' , ( req , res ) => res.status(200).send('/api/app/sessions')
 feature_api.get('/fetch' , asyncSupport( async ( req , res , next ) => {
     // user id 
     let { _id } = req.token;
-    let sessions = await getSessionsByDate( new Date() , _id );
+    let sessions = await getSessionsByDate({ 
+        start: new Date() ,
+        patientId: _id 
+    });
     res.status(200).send( sessions );
 }));
 
