@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View , Button , TouchableOpacity } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useContext } from 'react';
 
 import { authScreens } from '../../screenNames';
+import { UserContext } from '../../../contexts/context.user';
+
+import NativeTextHeading from '../../../components/native/native.text.heading';
 
 
 const AppAuthedTemplate = ({ navigation, children }) => {
+
+    const { user } = useContext( UserContext );
 
     const buttonPressed = ( item ) => {
         console.log( item );
@@ -16,6 +22,9 @@ const AppAuthedTemplate = ({ navigation, children }) => {
             <View style={ styles.topBar }>
                 <View style={ styles.topBarLeft }>
                     <MaterialIcons onPress={ () => buttonPressed('profile') } name="face" size={24} color="black" />   
+                    <NativeTextHeading size={ 'sm' } color={ 'black' } styling={ { paddingHorizontal: 10 } }>
+                         { user.username }
+                    </NativeTextHeading>
                 </View>
                 <View style={ styles.topBarRight }>
                     <Ionicons onPress={ () => buttonPressed('profile') } name="notifications-outline" size={24} color="black" />
@@ -58,7 +67,9 @@ const styles = StyleSheet.create ( {
 
     topBarLeft: {
         display: 'flex',
-        flex: 1
+        flex: 1 , 
+        flexDirection: 'row',
+        alignItems: 'center'
     },
 
     topBarRight: {

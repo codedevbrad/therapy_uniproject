@@ -24,16 +24,18 @@ db_test_api.get('/getsessionsbydate' , asyncSupport( async ( req , res ) => {
 
     let { patientId } = req.query;
 
-    // tomorrow  : 4/8/2022.
-    let tomorrow = new Date();
-    tomorrow.setDate( new Date().getDate() + 1 );
+    // today.
+    let dateToday = moment().local().format('YYYY-MM-DD HH:mm');
 
     let activities_tomorrow = await getSessionsByDate({
-        start: tomorrow , 
+        start: dateToday , 
         patientId
     });
 
-    res.status( 200 ).send( activities_tomorrow );
+    res.status( 200 ).send({ 
+        currTime: dateToday , 
+        sessions: activities_tomorrow 
+    });
 }));
 
 
@@ -43,13 +45,16 @@ db_test_api.get('/getsessionsbydate' , asyncSupport( async ( req , res ) => {
 db_test_api.get('/testtime' , asyncSupport( async ( req, res ) => {
 
     try {
+        let dateOld = new Date('2022-08-07T17:46:33.000+00:00');
+        let m = moment( dateOld );
 
         let dateStandard = new Date();
         let dateMoment = moment().local().format('YYYY-MM-DD HH:mm');
 
         res.status( 200 ).send({ 
                   timeMoment: dateMoment ,
-                timeStandard: dateStandard
+                timeStandard: dateStandard , 
+                timeSince: m.fromNow()
         });
     }
     catch ( err ) {
@@ -67,14 +72,16 @@ db_test_api.post('/addsession' , asyncSupport( async ( req, res ) => {
 
         let { data } = req.body;
         let date = moment().local().format('YYYY-MM-DD HH:mm');
+        let timeConverted = moment().local().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
         let sessionCreated = await addSession({ 
             ...data , 
-            date
+            date , 
+            date_timezone: timeConverted 
         });
         res.status( 200 ).send({
              sessionCreated , 
-             timeStamped: date
+             timeStamped: date , 
         });
     }
     catch ( err ) {

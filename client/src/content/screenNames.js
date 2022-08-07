@@ -6,3 +6,8 @@ export const loginScreens = {
 export const authScreens = [ 
      'dashboard' , 'calendar'
 ]
+
+export const authDashboardScreens = {
+        activities: 'activities' , 
+     therapistChat: 'chat'
+}

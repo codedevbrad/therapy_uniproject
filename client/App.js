@@ -12,20 +12,21 @@ import UserContextWrapper from './src/contexts/context.user';
 import LoginUsername from './src/content/noAuthed/screens/Login/step.one/index';
 import LoginPassword from './src/content/noAuthed/screens/Login/step.two/index';
 
-// authed..
+// authed navigation item..
 import Dashboard      from './src/content/authed/screens/Dashboard/index';
 import CalendarScreen from './src/content/authed/screens/Calendar';
 
+// authed dashboard items.
 
 export default function App ( ) {
     return (
         <UserContextWrapper>
             <NavigationContainer>
-                <Stack.Navigator>
-                    <Stack.Screen name={ loginScreens.step_1 } component={ LoginUsername }  options={{ headerShown: false }} />
-                    <Stack.Screen name={ loginScreens.step_2 } component={ LoginPassword }  options={{ headerShown: false }} />
-                    <Stack.Screen name="dashboard" component={ Dashboard } options={{ headerShown: false }} />
-                    <Stack.Screen name="calendar"  component={ CalendarScreen } options={{ headerShown: false }} />
+                <Stack.Navigator screenOptions={{ headerShown: false }}>
+                    <Stack.Screen name={ loginScreens.step_1 } component={ LoginUsername }  />
+                    <Stack.Screen name={ loginScreens.step_2 } component={ LoginPassword }   />
+                    <Stack.Screen name="dashboard" component={ Dashboard }  />
+                    <Stack.Screen name="calendar"  component={ CalendarScreen }  />
                 </Stack.Navigator>
             </NavigationContainer>
         </UserContextWrapper> 

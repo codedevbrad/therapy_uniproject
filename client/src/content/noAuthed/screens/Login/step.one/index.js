@@ -14,6 +14,9 @@ import NativeTextHeading   from '../../../../../components/native/native.text.he
 import NativeTextParagraph from '../../../../../components/native/native.text.paragraph';
 
 
+// https://res.cloudinary.com/dezoqwmss/image/upload/v1659900317/project_uniTherapyapp/theripal-removebg-preview_dxzkoc.png
+
+
 function WelcomeBack ({ pageNavigate , username } ) {
 
     let { setUsername } = useContext( UserContext );

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // therapyType
 // type: [ '' , '' . '' ]
+
 const TherapyType = new mongoose.Schema({
    type: { type: String }
 })
@@ -12,7 +13,8 @@ const UsersSchema = new mongoose.Schema ({
   password:     { type: String } ,
   therapy_type: [ TherapyType  ] , 
   last_logged:  { type: Date   } ,
-  email:        { type: String }
+  email:        { type: String } , 
+  avatarUrl:    { type: String }
 });
 
 module.exports = mongoose.model( 'users' , UsersSchema );

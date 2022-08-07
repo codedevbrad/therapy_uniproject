@@ -12,7 +12,6 @@ import NativeTextHeading   from '../../../../components/native/native.text.headi
 import NativeTextParagraph from '../../../../components/native/native.text.paragraph';
 
 
-
 export default function CalendarScreen ( { navigation } ) {
 
     const [ sessionData , setSessions ] = useState([]);
@@ -78,7 +77,7 @@ export default function CalendarScreen ( { navigation } ) {
                             { sessionSelected.map( ( session , id  ) =>
                                 <View key={ `calendar_id__${ id }` } style={ { backgroundColor: 'lightblue' ,  padding: 15 , borderRadius: 10 , marginTop: 10 , marginBottom: 10 } }>
                                     <NativeTextHeading size={ 'sm' } styling={ { color: 'white' , padding: 8 } }>
-                                        { session.dateDisplay }
+                                        { session.date_timezone }
                                     </NativeTextHeading>
 
                                     <NativeTextHeading size={ 'md' } styling={ { color: 'white' , padding: 8 } }>

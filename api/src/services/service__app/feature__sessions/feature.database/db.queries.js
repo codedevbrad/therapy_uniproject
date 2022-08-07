@@ -1,18 +1,24 @@
 const Sessions = require('./db.model');
+const moment = require('moment');
 
 
 // **** FINDER QUERIES **** //
 
 function getSessionsAll ({ patientId }) {
-	return Sessions.find({ patient_id: patientId });
+	return Sessions.find({ patient_id: patientId }).lean();
 }
 
-function getSessionsByDate({ start , patientId }) {
+
+async function getSessionsByDate({ start = new Date() , patientId }) {
+
     let end_date = new Date(new Date().getFullYear(), 11, 31);
-    return Sessions.find({
+
+    let dates = await Sessions.find({
         date: { $gte: start, $lt: end_date } , 
         patient_id: patientId
-    });
+    }).lean();
+
+    return dates;
 }
 
 

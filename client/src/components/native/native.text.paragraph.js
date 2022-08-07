@@ -22,7 +22,7 @@ export default function NativeTextParagraph ( { size = 'sm' , color = 'white' , 
 
         useEffect( ( ) => {
             determineSize( size );
-        }, [] );
+        }, [ size ] );
 
         return (
             <Text style={ { fontWeight: '400', fontSize: fontsize , color , ...styling }}>
