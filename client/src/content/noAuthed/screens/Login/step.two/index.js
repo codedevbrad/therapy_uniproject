@@ -15,6 +15,8 @@ import NativeTextParagraph from '../../../../../components/native/native.text.pa
 import Pin from './partials/partial.pin';
 import TouchPad from './partials/partial.touchpad';
 
+import { awaitTimeout } from '../../../../../utils/delay';
+
 
 export default function LoginPassword ( { navigation } ) {
 
@@ -70,6 +72,7 @@ export default function LoginPassword ( { navigation } ) {
                    setState( states.accepted );
                    setUser( response.user );
                    await storeInStorage('token' , response.token );
+                   await awaitTimeout( 700 );
                    navigation.navigate('dashboard');
                 
               } else {
@@ -91,7 +94,9 @@ export default function LoginPassword ( { navigation } ) {
 
     useEffect( ( ) => {
         console.log('logging in');
-    } , [ ] );
+        resetAttempt();
+        resetColor();
+    } , [ navigation  ] );
 
     return (
       <AppNoAuthedTemplate screenColor={ state.color }>
@@ -112,7 +117,13 @@ export default function LoginPassword ( { navigation } ) {
             </View>
 
             <View style={[ styles.flex , { flex: 3 }]}>          
-                  <TouchPad resetOnRefresh={ resetColor } pinCode={ pin } addToPin={ setPin } pinLength={ 5 } completed={ pinCompleted } pinHighlight={ state.pinHighlight } />
+                  <TouchPad resetOnRefresh={ resetColor } 
+                                   pinCode={ pin } 
+                                  addToPin={ setPin } 
+                                 pinLength={ 5 } 
+                                 completed={ pinCompleted } 
+                              pinHighlight={ state.pinHighlight } 
+                    />
             </View>
 
           </View>

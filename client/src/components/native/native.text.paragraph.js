@@ -2,7 +2,7 @@ import { Text } from 'react-native';
 import { useEffect , useState } from 'react';
 
 
-export default function NativeTextParagraph ( { size = 'sm' , color = 'white' , children , styling } ) {
+export default function NativeTextParagraph ( { size = 'sm' , color = 'white' , children , styling , keyIndex = 'not set', perams } ) {
 
         const [fontsize, setsize] = useState(0);
 
@@ -25,7 +25,7 @@ export default function NativeTextParagraph ( { size = 'sm' , color = 'white' , 
         }, [ size ] );
 
         return (
-            <Text style={ { fontWeight: '400', fontSize: fontsize , color , ...styling }}>
+            <Text style={[ { fontWeight: '400', fontSize: fontsize , color } , styling ]} key={ keyIndex } { ...perams }>
                     { children }
             </Text>
         )

@@ -8,6 +8,7 @@ export const authScreens = [
 ]
 
 export const authDashboardScreens = {
-        activities: 'activities' , 
-     therapistChat: 'chat'
+        activities: 'Activities' , 
+     therapistChat: 'Chat' ,
+       weeklyGoals: 'Weekly goals'
 }

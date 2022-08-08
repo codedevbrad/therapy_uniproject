@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , Button , TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View , Button , TouchableOpacity , Image } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useContext } from 'react';
 
@@ -7,6 +7,8 @@ import { authScreens } from '../../screenNames';
 import { UserContext } from '../../../contexts/context.user';
 
 import NativeTextHeading from '../../../components/native/native.text.heading';
+
+
 
 
 const AppAuthedTemplate = ({ navigation, children }) => {
@@ -21,7 +23,9 @@ const AppAuthedTemplate = ({ navigation, children }) => {
         <View style={styles.container}>
             <View style={ styles.topBar }>
                 <View style={ styles.topBarLeft }>
-                    <MaterialIcons onPress={ () => buttonPressed('profile') } name="face" size={24} color="black" />   
+                    <View>
+                       <Image style={{ borderRadius: 25 , width: 50 , height: 50 } } source={{ uri: user.avatarUrl }} />
+                    </View>
                     <NativeTextHeading size={ 'sm' } color={ 'black' } styling={ { paddingHorizontal: 10 } }>
                          { user.username }
                     </NativeTextHeading>

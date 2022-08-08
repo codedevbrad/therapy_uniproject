@@ -6,7 +6,7 @@ export const storeInStorage = async ( key , value ) => {
     await AsyncStorage.setItem( key , jsonValue)
   } catch (e) {
     // saving error
-    console.log('error saving in storage' , e)
+    console.log('error saving in storage' , e);
   }
 }
   
@@ -16,6 +16,16 @@ export const getFromStorage = async ( key ) => {
     return JSON.parse( data );
   } catch(e) {
     // error reading value
-    console.log('error fetching storage' , e )
+    console.log('error fetching storage' , e );
+  }
+}
+
+export const removeFromStorage = async ( key ) => {
+  try {
+      await AsyncStorage.removeItem(key);
+      return true;
+  }
+  catch(e) {
+      console.log('error removing storage item' , e )
   }
 }
