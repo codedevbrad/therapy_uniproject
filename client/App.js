@@ -1,5 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Button } from 'react-native';
 
 import { loginScreens , authDashboardScreens } from './src/content/screenNames';
 
@@ -25,13 +26,14 @@ export default function App ( ) {
     return (
         <UserContextWrapper>
             <NavigationContainer>
-                <Stack.Navigator screenOptions={{ headerShown: false }}>
-                    <Stack.Screen name={ loginScreens.step_1 } component={ LoginUsername }  />
-                    <Stack.Screen name={ loginScreens.step_2 } component={ LoginPassword }   />
-                    <Stack.Screen name="dashboard" component={ Dashboard }  />
+                <Stack.Navigator screenOptions={{ headerShown: false } }>
+                    <Stack.Screen name={ loginScreens.step_1 } component={ LoginUsername } />
+                    <Stack.Screen name={ loginScreens.step_2 } component={ LoginPassword } />
+
+                    <Stack.Screen name="dashboard" component={ Dashboard } options={{ gestureEnabled: false} } />
                     <Stack.Screen name="calendar"  component={ CalendarScreen }  />
                     <Stack.Screen name={ authDashboardScreens.activities }    component={ ActivitiesList }  />
-                    <Stack.Screen name={ authDashboardScreens.therapistChat } component={ ChatScreens }  />
+                    <Stack.Screen name={ authDashboardScreens.therapistChat } component={ ChatScreens }/>
                 </Stack.Navigator>
             </NavigationContainer>
         </UserContextWrapper> 

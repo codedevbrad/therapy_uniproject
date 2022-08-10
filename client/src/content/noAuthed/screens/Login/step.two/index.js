@@ -1,5 +1,7 @@
 import { useState , useEffect , useContext } from 'react';
 import { StyleSheet , View } from 'react-native';
+import { useIsFocused } from "@react-navigation/native";
+
 
 import AppNoAuthedTemplate from '../../../template/index';
 
@@ -51,6 +53,8 @@ export default function LoginPassword ( { navigation } ) {
         }
     }
 
+    const isFocused = useIsFocused();
+
     const [ state, setState ] = useState( states.normal );
 
     let { username , setUser } = useContext( UserContext );
@@ -90,13 +94,14 @@ export default function LoginPassword ( { navigation } ) {
           loginAttempt( username , password );
     }
 
-    // must expect username from previous screen.
-
     useEffect( ( ) => {
-        console.log('logging in');
-        resetAttempt();
-        resetColor();
-    } , [ navigation  ] );
+        // Call only when screen open or when back on screen 
+        if ( isFocused ) { 
+            console.log('refreshed');
+            resetAttempt( states.normal );
+        }
+    } , [ isFocused ] );
+
 
     return (
       <AppNoAuthedTemplate screenColor={ state.color }>

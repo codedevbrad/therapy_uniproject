@@ -81,7 +81,7 @@ export default function ChatScreen ( { navigation } ) {
      ]);
 
     return (
-      <AppAuthedTemplate navigation={ navigation }>
+      <AppAuthedTemplate navigation={ navigation } canGoBack={ true }>
             <View style={ styles.container }>
                  <FlatList data={ chats } keyExtractor={( item, index) => index.toString()} renderItem={( { item , index } ) => 
                      <ChatMessage message={ item } index={ index } />

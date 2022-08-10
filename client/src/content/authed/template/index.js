@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , Button , TouchableOpacity , Image } from 'react-native';
+import { StyleSheet, Text, View , Button , TouchableOpacity , Image , TouchableWithoutFeedback } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useContext } from 'react';
 
@@ -9,9 +9,18 @@ import { UserContext } from '../../../contexts/context.user';
 import NativeTextHeading from '../../../components/native/native.text.heading';
 
 
+const BackTrack = ( { navigation } ) => {
+    return (
+        <TouchableWithoutFeedback onPress={() => navigation.goBack( ) }>
+            <View style={{ marginHorizontal: 10 }}>
+                <Ionicons name="arrow-back" size={24} color="black" /> 
+            </View>
+        </TouchableWithoutFeedback>
+    )
+}
 
 
-const AppAuthedTemplate = ({ navigation, children }) => {
+const AppAuthedTemplate = ({ navigation, children , screenColor = 'white' , disableBackButton = false } ) => {
 
     const { user } = useContext( UserContext );
 
@@ -21,7 +30,11 @@ const AppAuthedTemplate = ({ navigation, children }) => {
 
     return (
         <View style={styles.container}>
+
             <View style={ styles.topBar }>
+
+                { !disableBackButton &&  <BackTrack navigation={ navigation }/> }
+
                 <View style={ styles.topBarLeft }>
                     <View>
                        <Image style={{ borderRadius: 25 , width: 50 , height: 50 } } source={{ uri: user.avatarUrl }} />
@@ -50,7 +63,7 @@ const AppAuthedTemplate = ({ navigation, children }) => {
                     </TouchableOpacity>
                 )}
             </View>
-            <StatusBar style="auto" />
+            <StatusBar style="dark"  />
         </View>
     )
 }
@@ -58,15 +71,11 @@ const AppAuthedTemplate = ({ navigation, children }) => {
 
 const styles = StyleSheet.create ( {
     container: {
-        flex: 1,
-        display: 'flex',
-        backgroundColor: '#fff',
+        flex: 1 , display: 'flex', backgroundColor: 'white', paddingTop: 40
     },
 
     topBar: {
-        flex: 1, flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 20
+        flex: 0.5, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
 
     topBarLeft: {

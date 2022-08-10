@@ -4,7 +4,7 @@ const { ObjectId } = mongoose;
 const Subscribed = new mongoose.Schema ({
         patient_id: { type: ObjectId , required: true } ,
              delay: { type: String } , 
-          activity: { type: ObjectId , required: true } ,
+       activity_id: { type: ObjectId , required: true } ,
               type: { type: String } , 
 });
 
@@ -16,7 +16,7 @@ module.exports = mongoose.model( "subscriptions" , Subscribed );
     {
         patient_id: "6262c8603cd811dc1bf17226" , 
              delay: "4" , 
-          activity: "62ed24fbcd0b4127ed9577d8" , 
+       activity_id: "62ed24fbcd0b4127ed9577d8" , 
               type: "custom" | "template"
     }
 */
