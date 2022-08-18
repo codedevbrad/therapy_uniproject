@@ -1,10 +1,12 @@
 import { StyleSheet, View , FlatList } from 'react-native';
-import { useState , useContext } from 'react';
+import { useState , useContext ,useEffect } from 'react';
 import AppAuthedTemplate from '../../../template/index';
 import NativeTextParagraph from '../../../../../components/native/native.text.paragraph';
 import { UserContext } from '../../../../../contexts/context.user';
 import { timeSinceDate } from '../../../../../utils/momentFunctions';
 import NativeCustomAvatarImageCircle from '../../../../../components/custom/custom.AvatarImageCircle';
+
+import { useFetchChats } from '../../../../../config/firebase';
 
 
 function ChatTimeStamp ({ timeStamp , color = 'black' , styling }) {
@@ -28,7 +30,7 @@ function ChatMessage( { message } ) {
         return (
             <View style={ [ styles.messageSharable , { backgroundColor: cardColor , padding: 20  }] }>
 
-                   <ChatTimeStamp timeStamp={ message.timeStamp } color={ color} styling={{  marginBottom: 13 }} />
+                   <ChatTimeStamp timeStamp={ message.timestamp } color={ color} styling={{  marginBottom: 13 }} />
                    
                    <View style={ { flexDirection: 'row' , alignItems: 'center' } }>
 
@@ -40,7 +42,7 @@ function ChatMessage( { message } ) {
                    </View>
 
                    <NativeTextParagraph color={ color } styling={ { padding: 10 } }>
-                        { message.text }
+                        { message.message }
                    </NativeTextParagraph>
             </View>
         )
@@ -65,20 +67,12 @@ function ChatMessage( { message } ) {
 }
 
 
-export default function ChatScreen ( { navigation } ) {
 
-    const [ chats , setchats ] = useState([
-          {
-              sentBy: 'patient' , 
-              text: 'hi there, great to start therapy with you' , 
-              timeStamp: '2022-08-06T20:36:14.000+00:00'
-          } , 
-          {
-            sentBy: 'therapist' , 
-            text: 'Hi. Yes, great to meet you on here' , 
-            timeStamp: '2022-08-07T15:20:14.000+00:00'
-        }
-     ]);
+export default function ChatScreen ( { navigation } ) {
+ 
+    const [ chats , setChats ] = useState([]);
+
+    useFetchChats( setChats );
 
     return (
       <AppAuthedTemplate navigation={ navigation } canGoBack={ true }>
@@ -90,6 +84,7 @@ export default function ChatScreen ( { navigation } ) {
       </AppAuthedTemplate>
     );
 }
+
 
 const styles = StyleSheet.create({
 

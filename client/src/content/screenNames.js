@@ -10,5 +10,9 @@ export const authScreens = [
 export const authDashboardScreens = {
         activities: 'Activities' , 
      therapistChat: 'Chat' ,
-       weeklyGoals: 'Weekly goals'
+       weeklyGoals: 'Weekly goals' , 
+}
+
+export const authSingleScreens = {
+        activity: 'Activity'
 }

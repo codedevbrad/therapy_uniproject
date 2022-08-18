@@ -2,7 +2,7 @@
 const db_test_api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
 
-const { getActivityTemplates } = require('../db.queries').finderQueries;
+const { getActivityTemplates , getActivityTemplatesWithout } = require('../db.queries').finderQueries;
 const { addActivityTemplates , removeAllActivities } = require('../db.queries').mutableQueries;
 
 
@@ -14,6 +14,13 @@ db_test_api.get('/getactivities' , asyncSupport( async ( req, res ) => {
     let actvitities = await getActivityTemplates( );
     res.status( 200 ).send( actvitities );
 }));
+
+
+db_test_api.get('/getactivitiesExcluding' , asyncSupport( async ( req, res ) => {
+    let actvitities = await getActivityTemplatesWithout();
+    res.status( 200 ).send( actvitities );
+}));
+
 
 db_test_api.post('/saveactivity' , asyncSupport( async ( req, res ) => {
     let activityData = req.body;

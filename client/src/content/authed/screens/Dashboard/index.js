@@ -2,30 +2,17 @@ import { StyleSheet, Text, View , Button , FlatList , TouchableOpacity } from 'r
 import { useContext , useEffect } from 'react';
 import { UserContext } from '../../../../contexts/context.user';
 import AppAuthedTemplate from '../../template/index';
-
 import { authDashboardScreens } from '../../../screenNames';
-
 import NativeTextParagraph from '../../../../components/native/native.text.paragraph';
 
-  
 
 export default function Dashboard ( { navigation } ) {
 
     let { user } = useContext( UserContext );
 
-
-    const fetchContent = async( ) => {
-        console.log( user );
-    }
-
     const navigate = ( link ) => {
         navigation.navigate( link );
     }
-
-    useEffect( ( ) => {
-       fetchContent( );
-      
-    }, [ ]);
 
     return (
       <AppAuthedTemplate navigation={ navigation } disableBackButton={ true }>

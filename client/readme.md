@@ -1,0 +1,1 @@
+changed app.json to app.config.js

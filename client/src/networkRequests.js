@@ -36,10 +36,37 @@ export const UserRequests = {
                         .then(  data => resolve( data ))
                         .catch(  err => reject( err.response.data ) );
             });
+      }
+}
+
+
+// @ AUTHED 
+// @ requires
+//    * Bearer token for authentication.
+
+// api / app / activitytemplate / 
+
+export const ActivityTemplateRequests = {
+
+      api_endpoint: '/api/app/activitytemplate/' ,
+
+      fetchTemplates: function ( ) {
+            return new Promise( async ( resolve , reject ) => {  
+
+                   let token = await getFromStorage('token');
+
+                   const config = {
+                        headers: { Authorization: `Bearer ${token}` }
+                  };
+
+                   axios.get( `${ localPort + this.api_endpoint }/fetch` , config )
+                        .then(   res => res.data )
+                        .then(  data => resolve( data ))
+                        .catch(  err => reject( err.response.data ) );
+            });
         }
 }
 
-// @ AUTHED 
 
 // api / app / sessions
 
@@ -61,5 +88,5 @@ export const CalendarRequests = {
                         .then(  data => resolve( data ))
                         .catch(  err => reject( err.response.data ) );
             });
-        }
+      }
 }
