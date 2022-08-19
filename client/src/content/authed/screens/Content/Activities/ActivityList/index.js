@@ -4,7 +4,10 @@ import AppAuthedTemplate from '../../../../template/index';
 import NativeTextParagraph from '../../../../../../components/native/native.text.paragraph';
 import { ActivityTemplateRequests } from '../../../../../../networkRequests';
 
+import { authSingleScreens } from '../../../../../screenNames';
 
+
+// fetch subscribed activities instead.
 export default function ActivitiesList ( { navigation } ) {
 
     const [activities, setactivities] = useState([]);
@@ -20,8 +23,9 @@ export default function ActivitiesList ( { navigation } ) {
         }
     }
 
-    const navigate = ( link ) => {
-        navigation.navigate( 'Activity' );
+    const navigate = ( item ) => {
+        console.log( 'navigating' , item );
+        navigation.navigate( authSingleScreens.activityWelcome , item );
     }
 
     useEffect ( ( ) => {
@@ -32,7 +36,7 @@ export default function ActivitiesList ( { navigation } ) {
       <AppAuthedTemplate navigation={ navigation }>
 
                   <View style={ styles.container }>
-                      <FlatList data={ activities } keyExtractor={(item, index) => index.toString()} renderItem={( { item , index } ) => 
+                      <FlatList data={ activities } keyExtractor={ ( keyItem , index ) => index.toString()} renderItem={( { item , index } ) => 
 
                           <TouchableOpacity onPress={ ( ) => navigate( item ) } key={ `activityList-link__${ index }`} style={{
                               flexDirection: 'row' , backgroundColor: 'lightblue' , marginVertical: 10 , justifyContent: 'center' , borderRadius: 10 ,

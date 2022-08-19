@@ -19,8 +19,14 @@ import CalendarScreen from './src/content/authed/screens/Calendar';
 
 // authed dashboard items.
 import ActivitiesList from './src/content/authed/screens/Content/Activities/ActivityList/index';
-import Activity       from './src/content/authed/screens/Content/Activities/Activity/index';
 import ChatScreens    from './src/content/authed/screens/Content/Chat/index';
+// goals
+
+// authed activity items
+import ActivityWelcome  from './src/content/authed/screens/Content/Activities/Activity/screens/0.activity.stage.welcome/index';
+import ActivityStarting from './src/content/authed/screens/Content/Activities/Activity/screens/1.activity.stage.activity/index';
+import ActivityEnded    from './src/content/authed/screens/Content/Activities/Activity/screens/2.activity.stage.endscreen/index';
+
 
 export default function App ( ) {
     return (
@@ -32,9 +38,14 @@ export default function App ( ) {
 
                     <Stack.Screen name="dashboard" component={ Dashboard } options={{ gestureEnabled: false} } />
                     <Stack.Screen name="calendar"  component={ CalendarScreen } />
-                    <Stack.Screen name={ authDashboardScreens.activities }    component={ ActivitiesList }  />
-                    <Stack.Screen name={ authSingleScreens.activity }      component={ Activity } />
-                    <Stack.Screen name={ authDashboardScreens.therapistChat } component={ ChatScreens }/>
+                    <Stack.Screen name={ authDashboardScreens.therapistChat } component={ ChatScreens } />
+
+                    <Stack.Screen name={ authDashboardScreens.activities }    component={ ActivitiesList   } />
+
+                    <Stack.Screen name={ authSingleScreens.activityWelcome  } component={ ActivityWelcome  } />
+                    <Stack.Screen name={ authSingleScreens.activityStarting } component={ ActivityStarting } />
+                    <Stack.Screen name={ authSingleScreens.activityEnded    } component={ ActivityEnded    } />
+
                 </Stack.Navigator>
             </NavigationContainer>
         </UserContextWrapper> 
