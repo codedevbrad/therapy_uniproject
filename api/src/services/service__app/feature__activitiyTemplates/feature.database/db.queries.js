@@ -11,6 +11,9 @@ function getActivityTemplatesWithout( query ) {
     return ActivityTemplates.find().select(['-words'])
 }
 
+function getActivityTemplatesByIds( ids ) {
+    return ActivityTemplates.find().where('_id').in(ids).lean()
+}
 
 // **** MUTABLE QUERIES **** //
 
@@ -32,7 +35,7 @@ async function removeAllActivities ( ) {
 // EXPORTS
 
 module.exports.finderQueries = {
-	getActivityTemplates , getActivityTemplatesWithout
+	getActivityTemplates , getActivityTemplatesWithout , getActivityTemplatesByIds
 }
 
 module.exports.mutableQueries = {

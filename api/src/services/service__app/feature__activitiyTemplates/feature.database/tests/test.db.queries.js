@@ -2,7 +2,7 @@
 const db_test_api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
 
-const { getActivityTemplates , getActivityTemplatesWithout } = require('../db.queries').finderQueries;
+const { getActivityTemplates , getActivityTemplatesWithout, getActivityTemplatesByIds } = require('../db.queries').finderQueries;
 const { addActivityTemplates , removeAllActivities } = require('../db.queries').mutableQueries;
 
 
@@ -22,6 +22,12 @@ db_test_api.get('/getactivitiesExcluding' , asyncSupport( async ( req, res ) => 
 }));
 
 
+db_test_api.get('/getactivitiesbyids' , asyncSupport( async ( req, res ) => {
+    let { ids } = req.body;
+    let actvitities = await getActivityTemplatesByIds( ids );
+    res.status( 200 ).send( actvitities );
+}));
+
 db_test_api.post('/saveactivity' , asyncSupport( async ( req, res ) => {
     let activityData = req.body;
     let saved = await addActivityTemplates( activityData );
@@ -29,10 +35,12 @@ db_test_api.post('/saveactivity' , asyncSupport( async ( req, res ) => {
     res.status( 200 ).send( saved );
 }));
 
+
 db_test_api.get('/removeactivities' , asyncSupport( async ( req, res ) => {
     await removeAllActivities( );
     res.status( 200 ).send('removed all activities');
 }));
+
 
 db_test_api.put('addwordstoactivity' , asyncSupport( async ( req, res ) => {
     let { activityID } = req.body;

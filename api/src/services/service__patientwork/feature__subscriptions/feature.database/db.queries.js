@@ -4,7 +4,7 @@ const Subscribed = require('./db.model');
 // **** FINDER QUERIES **** //
 
 function getSubscriptionsAll ({ patientId }) {
-	return Subscribed.find({ patient_id: patientId });
+	return Subscribed.find({ patient_id: patientId }).lean();
 }
 
 
