@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose;
 
 const Subscribed = new mongoose.Schema ({
-        patient_id: { type: ObjectId , required: true } ,
-    date_completed: { type: Date , default: Date.now } , 
-        sound_file: { type: String } ,
-        flashcards: { type: Array }
+            patient_id: { type: ObjectId , required: true } ,
+        date_completed: { type: Date , default: Date.now } , 
+    activity_completed: { 
+        audioFile:   { type: String , required: true } ,
+        activity_id: { type: String , required: true }
+    },
 });
 
 

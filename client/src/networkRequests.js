@@ -44,13 +44,14 @@ export const UserRequests = {
 // @ requires
 //    * Bearer token for authentication.
 
-// api / app / activitytemplate / 
+// api / patientwork / subscriptions / 
 
-export const ActivityTemplateRequests = {
+export const ActivitiesSubscribedRequests = {
 
-      api_endpoint: '/api/app/activitytemplate/' ,
+      api_endpoint: '/api/patientwork/subscriptions/' ,
 
-      fetchTemplates: function ( ) {
+      // / fetch
+      fetchSubscriptions: function ( ) {
             return new Promise( async ( resolve , reject ) => {  
 
                    let token = await getFromStorage('token');

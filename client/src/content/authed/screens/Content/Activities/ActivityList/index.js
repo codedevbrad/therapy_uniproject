@@ -2,19 +2,20 @@ import { StyleSheet, Text, View , Button , FlatList , TouchableOpacity } from 'r
 import { useEffect , useState } from 'react';
 import AppAuthedTemplate from '../../../../template/index';
 import NativeTextParagraph from '../../../../../../components/native/native.text.paragraph';
-import { ActivityTemplateRequests } from '../../../../../../networkRequests';
 
-import { authSingleScreens } from '../../../../../screenNames';
+import { authActivityNavigating } from '../../../../../screenNames';
+
+import { ActivitiesSubscribedRequests } from '../../../../../../networkRequests';
 
 
-// fetch subscribed activities instead.
 export default function ActivitiesList ( { navigation } ) {
 
     const [activities, setactivities] = useState([]);
 
     const fetchContent = async( ) => {
         try {
-            let activities = await ActivityTemplateRequests.fetchTemplates();
+            let activities = await ActivitiesSubscribedRequests.fetchSubscriptions();
+            console.log( activities );
             setactivities( activities );
         } 
         catch ( err ) {
@@ -24,8 +25,18 @@ export default function ActivitiesList ( { navigation } ) {
     }
 
     const navigate = ( item ) => {
-        console.log( 'navigating' , item );
-        navigation.navigate( authSingleScreens.activityWelcome , item );
+        let data = {
+            dataWelcome: {
+                tips: item.therapist_tips , 
+                delay: item.delay
+            } , 
+            dataPlay: {
+                delay: item.delay , 
+                words: item.words , 
+                 type: item.type 
+            }
+        }
+        authActivityNavigating( 'TO-SCREEN-WELCOME' , navigation.navigate , data );
     }
 
     useEffect ( ( ) => {

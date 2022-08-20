@@ -7,8 +7,11 @@ import NativeTextParagraph from '../../../../../../../../components/native/nativ
 
 import { authActivityNavigating } from '../../../../../../../screenNames';
 
+import UseAudio from './audioCapture';
 
-function ActivitySentances ( { canStart = false , words , interval , endedCallback } ) {
+
+
+function ActivitySentances ( { canStart = false , words , interval , startActivitycallback , endActivitycallback } ) {
 
     const [ currWordIndex , setcurrWordIndex ] = useState(-1); 
 
@@ -23,16 +26,16 @@ function ActivitySentances ( { canStart = false , words , interval , endedCallba
             console.log( 'activity' , index );
             timeout = setTimeout( ( ) => { 
                 loopThrough( index + 1 ); 
-            } , parseInt( interval * 1000 ) );
+            } , interval );
         } 
         else if ( index == length ) {
             console.log( 'end of activity' );
-            endedCallback();
+            endActivitycallback();
         }
     }
 
     const start = ( ) => {
-        console.log('starting activity' , currWordIndex );
+        startActivitycallback();
         setcurrWordIndex( -1 );
         loopThrough( currWordIndex );
     }
@@ -85,6 +88,8 @@ const SentanceStyles = StyleSheet.create({
 // activityType = words | sentances.
 function ActivityHandler ( { activityWords , activityType , delay , navigate } ) {
 
+    const { startRecording , stopRecording } = UseAudio();
+
     const reducer = ( state , action ) => {
         switch ( action.type ) {
             case "NOT STARTED":
@@ -121,9 +126,16 @@ function ActivityHandler ( { activityWords , activityType , delay , navigate } )
         }
     }
 
+    const startActivity = ( ) => {
+        console.log('start activity recording');
+        startRecording();
+    }
+
     const endActivity = ( ) => {
         dispatchActivity({ type: "ENDED" });
         loopThroughTillEnd( activityEndTick );
+        console.log('end activity recording');
+        stopRecording();
     }
 
     return (
@@ -132,7 +144,8 @@ function ActivityHandler ( { activityWords , activityType , delay , navigate } )
                    <ActivitySentances words={ activityWords } 
                                    interval={ delay } state={ activityState.state } 
                                    canStart={ activityState.state == 1 }
-                              endedCallback={ endActivity } 
+                                   startActivitycallback={ startActivity }
+                                   endActivitycallback={ endActivity } 
                     />
             </View>
          
@@ -175,28 +188,13 @@ const HandlerStyles = StyleSheet.create({
 
 export default function ActivityStarting ( { navigation , route } ) {
 
-    const [ subscribed , setSubscribed ] = useState({
-        delay: '2'
-    });
+    const [ activity , setActivity ] = useState({ words: [] , delay: 0 , type: '' });
 
-    const [ activity , setActivity ] = useState({
-        words: [
-            { word: "the" ,  inflection: [ 1 ] },
-            { word: "girl",  inflection: [ 2 ] },
-            { word: "wore",  inflection: [ 2 ] },
-            { word: "long",  inflection: [ 3 ] },
-            { word: "jeans", inflection: [ 0 ] },
-            { word: "with" , inflection: [ 2 ] },
-            { word: "blue" , inflection: [ 0 ] },
-            { word: "bows" , inflection: [ 3 ] }
-        ] , 
-        type: "sentances", 
-        therapistAttempt: "url",
-        articulation: [ 'th' , 'r' , 's' ]
-    });
-
-    useEffect( (  ) => {
-        console.log( route );
+    useEffect( ( ) => {
+        let { words , delay , type } = route.params;
+        setActivity({
+            words , delay: parseInt( delay * 1000 ) , type
+        });
     } , [ ] );
 
     return (
@@ -211,7 +209,7 @@ export default function ActivityStarting ( { navigation , route } ) {
                     <ActivityHandler 
                         activityWords={ activity.words }
                          activityType={ activity.type } 
-                                delay={ subscribed.delay } 
+                                delay={ activity.delay } 
                              navigate={ navigation.navigate } 
                     />
                 </View>

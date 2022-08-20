@@ -4,6 +4,7 @@ const { authenticateTokenMiddleware } = require('../../../service__user/authStra
 
 const { getSubscriptionsAll } = require('../feature.database/db.queries').finderQueries;
 const { getActivityTemplatesByIds } = require('../../../service__app/feature__activitiyTemplates/feature.database/db.queries').finderQueries;
+
 // / api / patientwork / subscriptions.
 
 feature_api.use( authenticateTokenMiddleware );

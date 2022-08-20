@@ -7,10 +7,14 @@ import NativeTextParagraph from '../../../../../../../../components/native/nativ
 import { authActivityNavigating } from '../../../../../../../screenNames';
 
 
+import NativeCustomButtonDark from '../../../../../../../../components/custom/custom.DarkButton';
+
 export default function ActivityWelcome  ( { navigation , route } ) {
 
+   let { dataWelcome , dataPlay } = route.params;
+
     const goToActivity = ( ) => {
-        authActivityNavigating( 'TO-SCREEN-START' , navigation.navigate );
+        authActivityNavigating( 'TO-SCREEN-START' , navigation.navigate , dataPlay );
     }
 
     return (
@@ -21,16 +25,17 @@ export default function ActivityWelcome  ( { navigation , route } ) {
                             Activity
                      </NativeTextHeading>
                      <NativeTextParagraph size={ 'md' } color={ 'black' }>
-                            Some useful advice for the activity.
+                            The activity has a delay of { dataWelcome.delay } 's
+                     </NativeTextParagraph>
+                     <NativeTextParagraph size={ 'md' } color={ 'black' }>
+                            { dataWelcome.tips }
                      </NativeTextParagraph>
                 </View>
                 
                 <View style={[ styles.center , { flex: 2 } ]}>
-                     <TouchableWithoutFeedback onPress={ ( ) => goToActivity( ) }>
-                            <Text>
-                                Go the activity
-                            </Text> 
-                     </TouchableWithoutFeedback>
+                     <NativeCustomButtonDark clickHandler={ () => goToActivity() }>
+                            Go to Activity 
+                     </NativeCustomButtonDark>
                 </View>
             </View>
         </AppAuthedTemplate>

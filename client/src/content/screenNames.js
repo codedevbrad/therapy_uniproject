@@ -21,18 +21,21 @@ export const authSingleScreens = {
 }
 
 
-export const authActivityNavigating = ( type , navigate ) => {
+export const authActivityNavigating = ( type , navigate , dataObj ) => {
         switch ( type ) {
+                case 'TO-SCREEN-WELCOME':
+                        navigate( authSingleScreens.activityWelcome , dataObj )
+                        return;
                 case 'TO-SCREEN-START':
-                        navigate( authSingleScreens.activityStarting )
+                        navigate( authSingleScreens.activityStarting , dataObj )
                         return;
                 case 'TO-SCREEN-END':
-                        navigate( authSingleScreens.activityEnded )
+                        navigate( authSingleScreens.activityEnded , dataObj )
                         return;
                 case 'TO-SCREEN-ACTIVITIES':
-                        navigate( authDashboardScreens.activities )
+                        navigate( authDashboardScreens.activities , dataObj )
                         return;
                 default:
-                        console.log('not caught where to navigate');
+                        console.log('not caught where to navigate' , dataObj );
         }
 }

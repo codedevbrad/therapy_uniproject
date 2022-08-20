@@ -51,6 +51,11 @@ app.use('/api/test/patientwork/subscriptions'      , require('./services/service
 // subscriptions : DEVELOPER
 app.use('/api/developer/patientwork/subscriptions' , require('./services/service__patientwork/feature__subscriptions/feature.developer/developer.api') );
 
+// complettedWork : API
+app.use('/api/patientwork/completedwork'           , require('./services/service__patientwork/feature__subscriptionsCompleted/feature.routes/feature.api') );
+/// completedWork : TESTS
+app.use('/api/test/patientwork/completedwork'     , require('./services/service__patientwork/feature__subscriptionsCompleted/feature.routes/feature.api.test'));
+
 
 // END
 
