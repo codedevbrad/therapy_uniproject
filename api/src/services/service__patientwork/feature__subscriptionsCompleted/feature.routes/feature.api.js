@@ -1,3 +1,4 @@
+const express = require('express');
 const feature_api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
 const { authenticateTokenMiddleware } = require('../../../service__user/authStrategy/functions/auth.token');
@@ -29,16 +30,16 @@ feature_api.get('/fetch' , asyncSupport( async ( req , res , next ) => {
   }
 */
 
-feature_api.post('/save' , asyncSupport( async ( req , res , next ) => {
+feature_api.post('/save' , express.json({limit: '50mb'}) , asyncSupport( async ( req , res , next ) => {
     let { _id } = req.token;
     let { audioFile , activity_id } = req.body;
-    let savedWorkRes = await addAsCompleted( {
+    await addAsCompleted( {
         patient_id: _id , 
         activity_completed : {
             audioFile , activity_id
         }
-    } );
-    res.status( 201 ).send( savedWorkRes );
+    });
+    res.status( 201 ).send('welldone');
 }));
 
 module.exports = feature_api;

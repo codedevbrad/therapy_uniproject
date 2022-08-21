@@ -41,8 +41,7 @@ export default function UseAudio ( ) {
         await recording.stopAndUnloadAsync();
         
         const uri = recording.getURI();
-        console.log('Recording stopped and stored at', uri);
-        
+
         const { sound , status } = await recording.createNewLoadedSoundAsync();
 
         updatedRecording = {
@@ -85,10 +84,11 @@ export default function UseAudio ( ) {
         });
       
         const audioBase64 = await blobToBase64(blob);
-      
-        console.log( audioBase64 );
-        // We're done with the blob and file uploading, close and release it
+
         blob.close();
+
+        return audioBase64;
+  
     }
 
     return {

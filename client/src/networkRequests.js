@@ -42,7 +42,7 @@ export const UserRequests = {
 
 // @ AUTHED 
 // @ requires
-//    * Bearer token for authentication.
+// * Bearer token for authentication.
 
 // api / patientwork / subscriptions / 
 
@@ -69,7 +69,37 @@ export const ActivitiesSubscribedRequests = {
 }
 
 
-// api / app / sessions
+// api / patientwork / completedwork. 
+
+export const CompletedWorkRequests = {
+      api_endpoint: '/api/patientwork/completedwork' ,
+      // / save ...
+      saveSubscriptionWork: function ({ activity_id , audio }) {
+            return new Promise( async ( resolve , reject ) => {  
+                  let token = await getFromStorage('token');
+
+                  let bodyStringify = JSON.stringify({
+                        activity_id , 
+                        audioFile: audio
+                  });
+
+                  const config = {
+                        headers: { 
+                              Authorization: `Bearer ${token}` , 
+                              'Content-Type': 'application/json' 
+                        }
+                  };
+
+                  axios.post( `${ localPort + this.api_endpoint }/save` , bodyStringify , config )
+                       .then(   res => res.data )
+                       .then(  data => resolve( data ))
+                       .catch(  err => reject( err.response.data ) );
+            });
+      }
+}
+
+
+// api / app / sessions.
 
 export const CalendarRequests = {
 
@@ -78,9 +108,9 @@ export const CalendarRequests = {
       fetchSessions: function ( ) {
             return new Promise( async ( resolve , reject ) => {  
 
-                   let token = await getFromStorage('token');
+                  let token = await getFromStorage('token');
 
-                   const config = {
+                  const config = {
                         headers: { Authorization: `Bearer ${token}` }
                   };
 

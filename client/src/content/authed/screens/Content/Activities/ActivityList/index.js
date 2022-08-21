@@ -4,7 +4,6 @@ import AppAuthedTemplate from '../../../../template/index';
 import NativeTextParagraph from '../../../../../../components/native/native.text.paragraph';
 
 import { authActivityNavigating } from '../../../../../screenNames';
-
 import { ActivitiesSubscribedRequests } from '../../../../../../networkRequests';
 
 
@@ -15,7 +14,6 @@ export default function ActivitiesList ( { navigation } ) {
     const fetchContent = async( ) => {
         try {
             let activities = await ActivitiesSubscribedRequests.fetchSubscriptions();
-            console.log( activities );
             setactivities( activities );
         } 
         catch ( err ) {
@@ -33,7 +31,8 @@ export default function ActivitiesList ( { navigation } ) {
             dataPlay: {
                 delay: item.delay , 
                 words: item.words , 
-                 type: item.type 
+                 type: item.type  ,
+          activity_id: item.activity_id
             }
         }
         authActivityNavigating( 'TO-SCREEN-WELCOME' , navigation.navigate , data );

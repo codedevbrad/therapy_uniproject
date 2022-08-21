@@ -9,6 +9,7 @@ import { authActivityNavigating } from '../../../../../../../screenNames';
 
 import UseAudio from './audioCapture';
 
+import { CompletedWorkRequests } from '../../../../../../../../networkRequests';
 
 
 function ActivitySentances ( { canStart = false , words , interval , startActivitycallback , endActivitycallback } ) {
@@ -29,7 +30,6 @@ function ActivitySentances ( { canStart = false , words , interval , startActivi
             } , interval );
         } 
         else if ( index == length ) {
-            console.log( 'end of activity' );
             endActivitycallback();
         }
     }
@@ -76,17 +76,16 @@ const SentanceStyles = StyleSheet.create({
     },
     text: {
         marginHorizontal: 4 , 
-        color: 'grey'
+        color: 'grey' 
     } , 
     currText: {
-        color: 'black',
-        fontWeight: '700'
+        color: 'black', fontWeight: '700'
     }
 });
 
 
 // activityType = words | sentances.
-function ActivityHandler ( { activityWords , activityType , delay , navigate } ) {
+function ActivityHandler ( { activity_id , activityWords , activityType , delay , navigate } ) {
 
     const { startRecording , stopRecording } = UseAudio();
 
@@ -108,8 +107,8 @@ function ActivityHandler ( { activityWords , activityType , delay , navigate } )
     const [ activityState , dispatchActivity ] = useReducer( reducer , { state: 0 , canClickButton: true  , text: 'Start Activity' } );
     const [ activityEndTick , setActivityEndTick ] = useState( 3 );
 
-    function loopThroughTillEnd ( index ) {
 
+    async function loopThroughTillEnd ( index ) {
         let end = 0;
         let timeout = null;
         let nextNum = index - 1;
@@ -121,8 +120,9 @@ function ActivityHandler ( { activityWords , activityType , delay , navigate } )
             } , 1200 );
         } 
         else if ( index == end ) {
+            authActivityNavigating( 'TO-SCREEN-END' , navigate ); 
+            dispatchActivity({ type: "ENDED" });
             console.log('end, go to the end screen');
-            authActivityNavigating( 'TO-SCREEN-END' , navigate );
         }
     }
 
@@ -131,11 +131,13 @@ function ActivityHandler ( { activityWords , activityType , delay , navigate } )
         startRecording();
     }
 
-    const endActivity = ( ) => {
-        dispatchActivity({ type: "ENDED" });
+    const endActivity = async ( ) => {
         loopThroughTillEnd( activityEndTick );
-        console.log('end activity recording');
-        stopRecording();
+        let audio = await stopRecording();
+        console.log( 'completed activity: ' , audio );
+        CompletedWorkRequests.saveSubscriptionWork({ 
+            activity_id , audio: JSON.stringify( audio )
+        });
     }
 
     return (
@@ -188,12 +190,17 @@ const HandlerStyles = StyleSheet.create({
 
 export default function ActivityStarting ( { navigation , route } ) {
 
-    const [ activity , setActivity ] = useState({ words: [] , delay: 0 , type: '' });
+    const [ activity , setActivity ] = useState({ words: [] , delay: 0 , type: '' , activity_id: '' });
 
     useEffect( ( ) => {
-        let { words , delay , type } = route.params;
+
+        let { words , delay , type , activity_id } = route.params;
+
         setActivity({
-            words , delay: parseInt( delay * 1000 ) , type
+            words , 
+            delay: parseInt( 0.1 * 1000 ) , 
+            type , 
+            activity_id 
         });
     } , [ ] );
 
@@ -209,7 +216,8 @@ export default function ActivityStarting ( { navigation , route } ) {
                     <ActivityHandler 
                         activityWords={ activity.words }
                          activityType={ activity.type } 
-                                delay={ activity.delay } 
+                                delay={ activity.delay }  
+                          activity_id={ activity.activity_id }
                              navigate={ navigation.navigate } 
                     />
                 </View>
