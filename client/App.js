@@ -21,6 +21,7 @@ import CalendarScreen from './src/content/authed/screens/Calendar';
 import ActivitiesList from './src/content/authed/screens/Content/Activities/ActivityList/index';
 import ChatScreens    from './src/content/authed/screens/Content/Chat/index';
 // goals
+import GoalsList      from './src/content/authed/screens/Content/Goals/index';
 
 // authed activity items
 import ActivityWelcome  from './src/content/authed/screens/Content/Activities/Activity/screens/0.activity.stage.welcome/index';
@@ -38,9 +39,10 @@ export default function App ( ) {
 
                     <Stack.Screen name="dashboard" component={ Dashboard } options={{ gestureEnabled: false} } />
                     <Stack.Screen name="calendar"  component={ CalendarScreen } />
-                    <Stack.Screen name={ authDashboardScreens.therapistChat } component={ ChatScreens } />
 
-                    <Stack.Screen name={ authDashboardScreens.activities }    component={ ActivitiesList   } />
+                    <Stack.Screen name={ authDashboardScreens.therapistChat } component={ ChatScreens } />
+                    <Stack.Screen name={ authDashboardScreens.activities    } component={ ActivitiesList } />
+                    <Stack.Screen name={ authDashboardScreens.weeklyGoals   } component={ GoalsList } />
 
                     <Stack.Screen name={ authSingleScreens.activityWelcome  } component={ ActivityWelcome  } />
                     <Stack.Screen name={ authSingleScreens.activityStarting } component={ ActivityStarting } />

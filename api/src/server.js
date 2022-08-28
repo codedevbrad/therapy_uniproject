@@ -42,6 +42,7 @@ app.use('/api/test/app/sessions'      , require('./services/service__app/feature
 // sessions : DEVELOPER.
 app.use('/api/developer/app/sessions' , require('./services/service__app/feature__sessions/feature.developer/developer.api') );
 
+
 // @SERVICE__PATIENTWORK
 
 // subscriptions : API
@@ -53,12 +54,17 @@ app.use('/api/developer/patientwork/subscriptions' , require('./services/service
 
 // complettedWork : API
 app.use('/api/patientwork/completedwork'           , require('./services/service__patientwork/feature__subscriptionsCompleted/feature.routes/feature.api') );
-/// completedWork : TESTS
+// completedWork  : TESTS
 app.use('/api/test/patientwork/completedwork'     , require('./services/service__patientwork/feature__subscriptionsCompleted/feature.routes/feature.api.test'));
 
 
-// END
+// goals : API
+app.use('/api/patientwork/goals'      , require('./services/service__patientwork/feature__goals/feature.routes/feature.api') );
+// goals : TESTS
+app.use('/api/test/patientwork/goals' , require('./services/service__patientwork/feature__goals/feature.routes/feature.api.test') );
 
+
+// END
 app.get('/api/end' , ( req , res ) => {
     console.log('hit route')
     res.status(200).send('can pass without auth')

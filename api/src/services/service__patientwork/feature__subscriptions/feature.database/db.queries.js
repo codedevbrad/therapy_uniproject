@@ -7,6 +7,10 @@ function getSubscriptionsAll ({ patientId }) {
 	return Subscribed.find({ patient_id: patientId }).lean();
 }
 
+function getSubscriptionsByIds ( ids ) {
+    return Subscribed.find().where('_id').in(ids).lean()
+}
+
 
 // **** MUTABLE QUERIES **** //
 
@@ -30,10 +34,11 @@ async function removeAllSubscriptionsByUser ( id ) {
     return ActivityTemplates.deleteMany({ patient_id: id });
 }
 
+
 // EXPORTS...
 
 module.exports.finderQueries = {
-	getSubscriptionsAll
+	getSubscriptionsAll , getSubscriptionsByIds
 }
 
 module.exports.mutableQueries = {

@@ -48,24 +48,47 @@ export const UserRequests = {
 
 export const ActivitiesSubscribedRequests = {
 
-      api_endpoint: '/api/patientwork/subscriptions/' ,
+      api_endpoint: '/api/patientwork/subscriptions' ,
 
       // / fetch
       fetchSubscriptions: function ( ) {
             return new Promise( async ( resolve , reject ) => {  
 
-                   let token = await getFromStorage('token');
+                  let token = await getFromStorage('token');
 
-                   const config = {
+                  const config = {
                         headers: { Authorization: `Bearer ${token}` }
                   };
 
-                   axios.get( `${ localPort + this.api_endpoint }/fetch` , config )
-                        .then(   res => res.data )
-                        .then(  data => resolve( data ))
-                        .catch(  err => reject( err.response.data ) );
+                  axios.get( `${ localPort + this.api_endpoint }/fetch` , config )
+                       .then(   res => res.data )
+                       .then(  data => resolve( data ))
+                       .catch(  err => reject( err.response.data ) );
             });
         }
+}
+
+
+// api / patientwork / goals.
+
+export const GoalsRequests = {
+      api_endpoint: '/api/patientwork/goals' , 
+
+      fetchGoals: function ( ) {
+            return new Promise( async ( resolve , reject ) => {
+                  
+                  let token = await getFromStorage('token');
+                  
+                  const config = {
+                        headers: { Authorization: `Bearer ${token}` }
+                  };
+
+                  axios.get( `${ localPort + this.api_endpoint }/fetch` , config )
+                       .then(   res => res.data )
+                       .then(  data => resolve( data ))
+                       .catch(  err => reject( err.response.data ) );
+            });
+      }
 }
 
 
@@ -103,7 +126,7 @@ export const CompletedWorkRequests = {
 
 export const CalendarRequests = {
 
-      api_endpoint: '/api/app/sessions/' ,
+      api_endpoint: '/api/app/sessions' ,
 
       fetchSessions: function ( ) {
             return new Promise( async ( resolve , reject ) => {  
@@ -121,3 +144,4 @@ export const CalendarRequests = {
             });
       }
 }
+
