@@ -18,5 +18,4 @@ api_test.use('/database/queries' , require('../service.database/tests/test.db.qu
 
 // UTIL TESTS
 
-// ...
 module.exports = api_test;

@@ -1,5 +1,4 @@
 const Sessions = require('./db.model');
-const moment = require('moment');
 
 
 // **** FINDER QUERIES **** //

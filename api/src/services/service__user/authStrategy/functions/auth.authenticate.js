@@ -18,7 +18,6 @@ for each new page refreshing state
 	- full user object without password.
 */
 
-
 /**
  * strips sensitive properties from an object.
  * @param {object} object - must be a plain object not mongoose model.
@@ -28,7 +27,6 @@ const stripSensitiveUserData = ( object ) => {
 	// expects the object to be a plain object and not a mongoose imutable object.
 	return (({ password, password_reminder , ...o }) => o)( object ); // remove sensitive data.
 }
-
 
 const getUserUsingTokenCredentials = ( id ) => new Promise( async ( resolve , reject ) => {
 	try {

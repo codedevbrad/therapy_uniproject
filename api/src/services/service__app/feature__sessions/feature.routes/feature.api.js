@@ -1,6 +1,7 @@
 const feature_api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
-const { authenticateTokenMiddleware } = require('../../../service__user/authStrategy/functions/auth.token');
+const { authenticateTokenMiddleware } = 
+require('../../../service__user/authStrategy/functions/auth.token');
 
 const { getSessionsByDate } = require('../feature.database/db.queries').finderQueries;
 

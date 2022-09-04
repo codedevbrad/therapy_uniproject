@@ -8,7 +8,6 @@ import NativeCustomAvatarImageCircle from '../../../../../components/custom/cust
 
 import { useFetchChats } from '../../../../../config/firebase';
 
-
 function ChatTimeStamp ({ timeStamp , color = 'black' , styling }) {
     return (
         <View style={ styling }>
@@ -18,7 +17,6 @@ function ChatTimeStamp ({ timeStamp , color = 'black' , styling }) {
         </View>
     )
 }
-
 
 function ChatMessage( { message } ) {
 
@@ -66,13 +64,12 @@ function ChatMessage( { message } ) {
     )
 }
 
-
-
 export default function ChatScreen ( { navigation } ) {
  
     const [ chats , setChats ] = useState([]);
+    const { user } = useContext(UserContext);
 
-    useFetchChats( setChats );
+    useFetchChats( setChats , user._id );
 
     return (
       <AppAuthedTemplate navigation={ navigation } canGoBack={ true }>

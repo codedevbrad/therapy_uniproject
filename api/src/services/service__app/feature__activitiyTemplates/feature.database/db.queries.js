@@ -35,7 +35,8 @@ async function removeAllActivities ( ) {
 // EXPORTS
 
 module.exports.finderQueries = {
-	getActivityTemplates , getActivityTemplatesWithout , getActivityTemplatesByIds
+	getActivityTemplates , getActivityTemplatesWithout , 
+    getActivityTemplatesByIds
 }
 
 module.exports.mutableQueries = {

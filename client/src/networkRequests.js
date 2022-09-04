@@ -39,13 +39,35 @@ export const UserRequests = {
       }
 }
 
-
 // @ AUTHED 
 // @ requires
 // * Bearer token for authentication.
 
-// api / patientwork / subscriptions / 
+// api / app / sessions.
+export const CalendarRequests = {
 
+      api_endpoint: '/api/app/sessions' ,
+
+      fetchSessions: function ( ) {
+            return new Promise( async ( resolve , reject ) => {  
+
+                  let token = await getFromStorage('token');
+
+                  const config = {
+                        headers: { Authorization: `Bearer ${token}` }
+                  };
+
+                   axios.get( `${ localPort + this.api_endpoint }/fetch` , config )
+                        .then(   res => res.data )
+                        .then(  data => resolve( data ))
+                        .catch(  err => reject( err.response.data ) );
+            });
+      }
+}
+
+
+
+// api / patientwork / subscriptions / 
 export const ActivitiesSubscribedRequests = {
 
       api_endpoint: '/api/patientwork/subscriptions' ,
@@ -68,9 +90,7 @@ export const ActivitiesSubscribedRequests = {
         }
 }
 
-
 // api / patientwork / goals.
-
 export const GoalsRequests = {
       api_endpoint: '/api/patientwork/goals' , 
 
@@ -91,9 +111,7 @@ export const GoalsRequests = {
       }
 }
 
-
 // api / patientwork / completedwork. 
-
 export const CompletedWorkRequests = {
       api_endpoint: '/api/patientwork/completedwork' ,
       // / save ...
@@ -117,30 +135,6 @@ export const CompletedWorkRequests = {
                        .then(   res => res.data )
                        .then(  data => resolve( data ))
                        .catch(  err => reject( err.response.data ) );
-            });
-      }
-}
-
-
-// api / app / sessions.
-
-export const CalendarRequests = {
-
-      api_endpoint: '/api/app/sessions' ,
-
-      fetchSessions: function ( ) {
-            return new Promise( async ( resolve , reject ) => {  
-
-                  let token = await getFromStorage('token');
-
-                  const config = {
-                        headers: { Authorization: `Bearer ${token}` }
-                  };
-
-                   axios.get( `${ localPort + this.api_endpoint }/fetch` , config )
-                        .then(   res => res.data )
-                        .then(  data => resolve( data ))
-                        .catch(  err => reject( err.response.data ) );
             });
       }
 }

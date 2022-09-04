@@ -1,7 +1,8 @@
 const test_api = require('express').Router();
 const { asyncSupport } = require('@codedevbrad/serverutils');
 
-const { generateAccessToken , authenticateTokenMiddleware , authenticateToken } = require('../functions/auth.token');
+const { generateAccessToken , authenticateTokenMiddleware , authenticateToken } 
+= require('../functions/auth.token');
       
 // TEST TOKEN STATEGY
 
