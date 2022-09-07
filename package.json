@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "fresh_install": "npm install && npm install --prefix api && npm install --prefix client",
-    "api-run":       "npm run server:watch --prefix api",
-    "native-run":    "npm run start --prefix client",
-    "app-run-all":   "concurrently \"npm run api-run\" \"npm run native-run\""
+    "api-run": "npm run server:watch --prefix api",
+    "native-run": "npm run start --prefix client",
+    "app-run-all": "concurrently \"npm run api-run\" \"npm run native-run\""
   },
   "repository": {
     "type": "git",

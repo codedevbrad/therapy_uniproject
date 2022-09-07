@@ -134,7 +134,10 @@ export const CompletedWorkRequests = {
                   axios.post( `${ localPort + this.api_endpoint }/save` , bodyStringify , config )
                        .then(   res => res.data )
                        .then(  data => resolve( data ))
-                       .catch(  err => reject( err.response.data ) );
+                       .catch(  err => {
+                         console.log(err.response.data);
+                         reject(  err.response.data ) 
+                       });
             });
       }
 }

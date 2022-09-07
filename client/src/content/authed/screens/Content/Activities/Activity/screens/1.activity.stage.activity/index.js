@@ -132,12 +132,20 @@ function ActivityHandler ( { activity_id , activityWords , activityType , delay 
     }
 
     const endActivity = async ( ) => {
-        loopThroughTillEnd( activityEndTick );
-        let audio = await stopRecording();
-        console.log( 'completed activity: ' , audio );
-        CompletedWorkRequests.saveSubscriptionWork({ 
-            activity_id , audio: JSON.stringify( audio )
-        });
+        try {
+            loopThroughTillEnd( activityEndTick );
+            let audio = await stopRecording();
+            console.log( 'completed activity: ' , audio );
+            CompletedWorkRequests.saveSubscriptionWork({ 
+                activity_id , audio
+            })
+            .catch( err => {
+                console.log( 'had an error with ending activity' )
+            })
+        }
+        catch (err) {
+            console.log( err )
+        }
     }
 
     return (
@@ -198,7 +206,7 @@ export default function ActivityStarting ( { navigation , route } ) {
 
         setActivity({
             words , 
-            delay: parseInt( 0.1 * 1000 ) , 
+            delay: parseInt( delay * 1000 ) , 
             type , 
             activity_id 
         });

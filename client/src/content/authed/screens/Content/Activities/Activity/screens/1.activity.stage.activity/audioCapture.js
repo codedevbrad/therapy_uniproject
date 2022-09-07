@@ -5,9 +5,6 @@ import base64 from 'react-native-base64';
 // https://docs.expo.dev/versions/latest/sdk/audio/#usage
 // https://stackoverflow.com/questions/67833814/expo-av-audio-recording
 // https://stackoverflow.com/questions/71017649/how-to-get-expo-audio-recording-content-as-base64
-// how audio uri can be converted. why a uri isnt a audio file.
-// how do i get a sound file from the EXPO audio URI?
-// can I ask the question on stackoverflow?
 
 export default function UseAudio ( ) {
 
@@ -57,17 +54,24 @@ export default function UseAudio ( ) {
             const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
             return `${minutesDisplay}:${secondsDisplay}`;
           }        
-      
-        // utitlity function to convert BLOB to BASE64
-        const blobToBase64 = (blob) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(blob);
-          return new Promise((resolve) => {
-            reader.onloadend = () => {
-              resolve(reader.result);
-            };
-          });
-        };
+
+        function blobToAudio(blob) {
+            var blob = blob;
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+
+            return new Promise((resolve) => {
+                reader.onloadend = function() {
+                  blob = reader.result.toString();
+                  console.log(blob)
+                  
+                  var fd = new FormData();
+                  fd.append('fname', 'test.wav');
+                  fd.append('data', blob);
+                  resolve( fd );
+              }
+            });
+        }
       
         // Fetch audio binary blob data
         const blob = await new Promise((resolve, reject) => {
@@ -82,13 +86,14 @@ export default function UseAudio ( ) {
           xhr.open("GET", uri , true);
           xhr.send(null);
         });
-      
-        const audioBase64 = await blobToBase64(blob);
 
-        blob.close();
-
-        return audioBase64;
-  
+        try {
+            const audio = await blobToAudio( blob );
+            return audio;
+        }
+        catch ( err ) {
+            console.log( err , 'error with audio capturing')
+        }
     }
 
     return {
