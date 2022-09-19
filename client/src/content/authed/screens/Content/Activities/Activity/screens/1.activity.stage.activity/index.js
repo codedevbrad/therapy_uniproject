@@ -106,23 +106,21 @@ function ActivityHandler ( { activity_id , activityWords , activityType , delay 
     // 0 = start , 1 = progress , 2 = ended.
     const [ activityState , dispatchActivity ] = useReducer( reducer , { state: 0 , canClickButton: true  , text: 'Start Activity' } );
     const [ activityEndTick , setActivityEndTick ] = useState( 3 );
-
-
+    
     async function loopThroughTillEnd ( index ) {
         let end = 0;
         let timeout = null;
         let nextNum = index - 1;
 
         if ( index > end ) {     
-            timeout = setTimeout( ( ) => { 
+            timeout = setTimeout( async ( ) => { 
                 setActivityEndTick( nextNum );
-                loopThroughTillEnd( nextNum ); 
+                return await loopThroughTillEnd( nextNum ); 
             } , 1200 );
         } 
         else if ( index == end ) {
+            console.log('end of countdown');
             authActivityNavigating( 'TO-SCREEN-END' , navigate ); 
-            dispatchActivity({ type: "ENDED" });
-            console.log('end, go to the end screen');
         }
     }
 
@@ -133,7 +131,8 @@ function ActivityHandler ( { activity_id , activityWords , activityType , delay 
 
     const endActivity = async ( ) => {
         try {
-            loopThroughTillEnd( activityEndTick );
+            dispatchActivity({ type: "ENDED" });
+            await loopThroughTillEnd( activityEndTick );
             let audio = await stopRecording();
             console.log( 'completed activity: ' , audio );
             CompletedWorkRequests.saveSubscriptionWork({ 

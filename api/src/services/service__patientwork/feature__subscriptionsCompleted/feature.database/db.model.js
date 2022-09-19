@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose;
 
-const Subscribed = new mongoose.Schema ({
+const SubscribedCompleted = new mongoose.Schema ({
             patient_id: { type: ObjectId , required: true } ,
         date_completed: { type: Date , default: Date.now } , 
     activity_completed: { 
@@ -11,7 +11,7 @@ const Subscribed = new mongoose.Schema ({
 });
 
 
-module.exports = mongoose.model( "completedsubscriptions" , Subscribed );
+module.exports = mongoose.model( "completedsubscriptions" , SubscribedCompleted );
 
 
 /*    // ================ rules ================ //

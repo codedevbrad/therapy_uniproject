@@ -19,9 +19,9 @@ function getUserandReturnByField( id , property ) {
 // **** MUTABLE QUERIES **** //
 
 
-// function updateField ( id , USER_MODEL ) {
-// 	return User.update( USER_MODEL , { where: { username: username } });
-// }
+function updateField ( id , USER_MODEL ) {
+	return User.update( USER_MODEL , { where: { username: username } });
+}
 
 
 module.exports.finderQueries = {
@@ -29,5 +29,5 @@ module.exports.finderQueries = {
 }
 
 module.exports.mutableQueries = {
-
+	updateField
 }
